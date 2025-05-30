@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>SafeShelter – 비상 대비 용품</title>
+  <link rel="stylesheet" href="shelter_style_2.css">
+
+
+
+
+
+  <style>
+  
+  body {
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #fff6f6; 
+    color: #2a2a2a;
+    background-image: url('./images/background.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: white;
+    border-bottom: 1px solid #eee;
+  }
+
+  .logo {
+    position: absolute;
+    left: 80px;
+    font-size: 40px;
+    font-weight: 900;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #d32f2f;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links.center {
+    justify-content: center;
+  }
+
+
+  .nav-links li {
+    position: relative;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #d32f2f;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 12px 16px;
+    display: inline-block;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: #d32f2f;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: #ffe5e5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+
+  .dropdown-content a {
+    text-decoration: none;
+    color: #2a2a2a;
+    padding: 10px 14px;
+    background: white;
+    border-radius: 4px;
+    white-space: nowrap;
+    text-align: center;
+    transition: background 0.2s;
+    font-size: 17px;
+    font-weight: 500;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #fae7c3;
+  }
+
+  .dropdown:hover .dropdown-content.grid {
+    display: grid;
+  }
+
+  .dropdown:hover .dropdown-content.row {
+    display: flex;
+  }
+
+  .dropdown-content.grid {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 14px;
+    width: 750px;
+    padding: 24px 28px;
+    background-color: #fae7c3;
+    border-radius: 12px;
+  }
+
+  .dropdown-content.row {
+    flex-direction: row;
+    gap: 14px;
+    padding: 12px 16px;
+    width: fit-content;
+    min-width: unset;
+  }
+
+  .hero-text {
+    text-align: left;
+    max-width: 700px;
+    margin: 160px 0 0 80px;
+    padding: 0;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .heading-line {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.2;
+    margin: 0 0 10px 0;
+    color: #d32f2f;
+  }
+
+  .hero-text button {
+    padding: 14px 28px;
+    margin-top: 23px;
+    font-size: 17px;
+    font-weight: 700;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .hero-text button:hover {
+    background-color: #d32f2f;
+  }
+
+
+  /* ── 메인 + 탭 레이아웃 ── */
+  .main {
+    display: flex;
+    padding: 20px;
+    background: #fdf6f5;
+  }
+
+  .tabs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 180px;
+    border-right: 2px solid #d32f2f;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 80px;
+    align-self: flex-start;
+    background: #fdf6f5;
+  }
+
+  .tabs li {
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    background: #fff;
+    transition: background 0.2s;
+  }
+
+  .tabs li:hover { background: #f2f2f2; }
+  .tabs li.active {
+    background: #d32f2f;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  /* ── 탭 콘텐츠 ── */
+  .tab-content {
+    flex: 1;
+    padding: 0 24px;
+  }
+  .tab-content > div { display: none; }
+  .tab-content > .active { display: block; }
+
+  /* ── 연락처 박스 ── */
+  .contact-info {
+    background: #333;
+    color: #fff;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  .contact-info p { margin: 4px 0; }
+
+  /* ── 타이포그래피 ── */
+  .tab-content h2 {
+    font-size: 2rem;
+    color: #d32f2f;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .section-list {
+    margin: 1rem 0;
+    list-style: disc inside;
+    padding-left: 0;
+  }
+
+  .section-list li {
+    font-size: 1.8rem;
+    margin: 0.5rem 0;
+  }
+
+  .info-box {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 12px;
+    margin: 8px 0 16px;
+    line-height: 1.6;
+    font-size: 1.2rem;
+  }
+
+  /* 언더라인용 클래스 */
+  .info-box .underline {
+    text-decoration: underline;
+    /* 필요시 font-weight: 600; 추가 가능 */
+  }
+  </style>
+
+</head>
+
+
+
+
+<body>
+  <!-- 헤더 -->
+  <header class="navbar">
+    <div class="logo">🛟Pocket Shelter</div>
+    <nav>
+      <ul class="nav-links center">
+        <li>
+          <a href="#">소개</a>
+        </li>
+        <li class="dropdown">
+          <a href="#", class="active">대피 시 유의사항</a>
+          <div class="dropdown-content row">
+            <a href="Precautions for evacuation.html">재난별 행동요령</a>
+            <a href="Emergency supplies.html">비상 대비 용품</a>
+          </div>
+        </li>
+        <li>
+          <a href="https://www.safekorea.go.kr/idsiSFK/neo/sfk/cs/contents/civil_defense/SDIJKM1402.html?menuSeq=57"
+            target="_blank"
+            rel="noopener noreferrer">
+            지역별 대피소
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+
+
+
+
+<!-- ── 메인 컨텐츠(탭 레이아웃 재활용) ── -->
+<div class="main">
+  <!-- 빈 탭(보이지 않지만 폭만 확보) -->
+  <ul class="tabs"></ul>
+
+  <!-- 실제 콘텐츠 -->
+  <div class="tab-content">
+    <div class="active">
+      <!-- 연락처 -->
+        <div class="contact-info">
+          <p>📞 소관부서 : 위기관리지원과 (044-205-4433)</p>
+        </div>
+        <br>
+        <h2>비상용 가방</h2>
+        <div class="info-box">
+          - 모든 가족 구성원들은 반드시 **비상용 가방**(Go Bag)을 준비해 두어야 합니다.<br>
+          - 비상용 가방에는 대피 시 필요한 물품들을 넣어두고, 각 가족 구성원의 비상용 가방을 배낭이나 바퀴 달린 여행용 가방처럼 튼튼하고 휴대가 편리한 가방에 넣어두세요.<br>
+          - 비상용 가방은 집에서 나갈 때 쉽게 가져갈 수 있어야 하므로, 연중 언제나 반드시 준비해 두세요.
+        </div>
+        <br><br><br>
+        <hr class="section-divider">
+        <br>
+        <h2>대피 준비물</h2>
+        <div class="info-box">
+          - 생수, 간편식, 손전등, 상비약, 라디오(건전지), 화장지(물티슈), 우의, 담요, 방독면, 마스크 등<br>
+          - 가능하면 평소에 가족 수대로 비상용 가방 준비<br>
+          - 비상식량, 음료수, 손전등, 건전지, 성냥, 라이터, 휴대용 라디오, 비상 의류, 속옷, 병따개, 화장지, 수건, 구급용품, 귀중품(현금/보험증서), 안경 등(생활용품), 생리용품, 종이기저귀<br><br>
+          → 귀중품 및 중요한 서류 : 중요한 서류는 방수가 되는 비닐에 보관<br>
+          → 여분의 자동차 키와 집 열쇠 세트<br>
+          → 신용카드, 현금카드 및 현금<br>
+          → 편안한 신발, 가벼운 우비, 얇은 담요, 보온력이 좋은 옷 등<br>
+          → 가족 연락처, 행동요령, 지도 등이 있는 재해지도 또는 수첩
+        </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
