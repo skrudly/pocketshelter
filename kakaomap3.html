@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>대피소 카테고리별 필터링 & 거리 필터 토글</title>
+  <style>
+    #map { width: 100%; height: 100vh; }
+    #controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+      background: #f9dda9ed;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      font-size: 14px;
+      user-select: none;
+    }
+    #category-buttons {
+      margin-top: 10px;
+    }
+    #category-buttons button {
+      margin: 3px;
+      padding: 5px 10px;
+      border: none;
+      background-color: #f38161;
+      color: #ffffff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #category-buttons button:hover {
+      background-color: #d8512c;
+    }
+
+    /* 스위치 토글 CSS */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      border-radius: 24px;
+      transition: 0.4s;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+    .switch input:checked + .slider {
+      background-color: #d8512c;
+    }
+    .switch input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    .wrap { position: absolute; left: 0; bottom: 40px; width: 250px; font-size: 12px; }
+    .info { background: #fff; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0px 1px 2px rgba(0,0,0,0.2); }
+    .title { padding: 8px 10px; font-weight: bold; background: #eee; position: relative; }
+    .close { position: absolute; top: 8px; right: 10px; width: 17px; height: 17px; background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png') no-repeat; cursor: pointer; }
+    .body { padding: 10px; }
+    .ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  </style>
+
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f48856e53998a87e8651ecf49636716&libraries=clusterer"></script>
+</head>
+<body>
+  <div id="controls">
+    <label class="switch">
+      <input type="checkbox" id="toggleDistance" />
+      <span class="slider"></span>
+    </label>
+    <span>가까운 대피소만 보기 (3km 이내)</span>
+
+    <div id="category-buttons">
+      <button onclick="filterMarkers('all')">전체</button>
+      <button onclick="filterMarkers('1')">한파쉼터</button>
+      <button onclick="filterMarkers('2')">무더위쉼터</button>
+      <button onclick="filterMarkers('3')">지진옥외</button>
+      <button onclick="filterMarkers('4')">지진해일</button>
+    </div>
+  </div>
+
+  <div id="map"></div>
+
+  <script>
+    const mapContainer = document.getElementById('map');
+    const defaultCenter = new kakao.maps.LatLng(37.5665, 126.9780);
+    const map = new kakao.maps.Map(mapContainer, { center: defaultCenter, level: 7 });
+
+    // 클러스터러 생성
+    const clusterer = new kakao.maps.MarkerClusterer({
+      map: map,
+      averageCenter: true,
+      minLevel: 4
+    });
+
+    // 내 위치 저장 변수
+    let userLoc = null;
+
+    // 내 위치 표시
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        userLoc = new kakao.maps.LatLng(lat, lon);
+
+        const marker = new kakao.maps.Marker({
+          position: userLoc,
+          map: map,
+          title: '현재 위치',
+          image: new kakao.maps.MarkerImage(
+            'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png',
+            new kakao.maps.Size(24, 35)
+          )
+        });
+
+        const infowindow = new kakao.maps.InfoWindow({
+          content: '<div style="padding:5px;">현재 위치</div>'
+        });
+        infowindow.open(map, marker);
+        map.setCenter(userLoc);
+      });
+    }
+
+    // 오버레이 추적용
+    let openedOverlay = null;
+
+    // 마커 저장용 객체 (카테고리별)
+    const categorizedMarkers = {
+      '1': [],
+      '2': [],
+      '3': [],
+      '4': []
+    };
+
+    // 전체 마커 저장
+    let allMarkers = [];
+
+    // 현재 선택된 카테고리
+    let currentCategory = 'all';
+
+    // shelters_data.json 로드
+    fetch('shelters_data.json')
+      .then(response => response.json())
+      .then(data => {
+        data.forEach((shelter, index) => {
+          const lat = shelter.LAT;
+          const lon = shelter.LOT;
+          const category = shelter.SHLT_SE_CD; // 대피소구분코드
+          const position = new kakao.maps.LatLng(lat, lon);
+
+          const marker = new kakao.maps.Marker({
+            position: position,
+            title: shelter.REARE_NM
+          });
+
+          const content = `
+            <div class="wrap">
+              <div class="info">
+                <div class="title">
+                  ${shelter.REARE_NM}
+                  <div class="close" title="닫기" onclick="closeOverlay(${index})"></div>
+                </div>
+                <div class="body">
+                  <div class="desc">
+                    <div class="ellipsis">주소: ${shelter.RONA_DADDR}</div>
+                    <div class="jibun ellipsis">종류: ${shelter.SHLT_SE_NM}</div>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+
+          const overlay = new kakao.maps.CustomOverlay({
+            content: content,
+            position: position,
+            yAnchor: 1.4
+          });
+
+          kakao.maps.event.addListener(marker, 'click', function () {
+            if (openedOverlay) openedOverlay.setMap(null);
+            overlay.setMap(map);
+            openedOverlay = overlay;
+          });
+
+          window['overlay_' + index] = overlay;
+
+          categorizedMarkers[category]?.push(marker); // 해당 카테고리 배열에 저장
+          allMarkers.push(marker); // 전체 배열에도 저장
+        });
+
+        // 초기 전체 마커 표시
+        clusterer.addMarkers(allMarkers);
+      })
+      .catch(err => {
+        console.error('대피소 데이터 로딩 실패:', err);
+      });
+
+    // 거리 계산 함수 (직선거리, km 단위)
+    function getDistance(latlng1, latlng2) {
+      const R = 6371; // 지구 반경 (km)
+      const dLat = (latlng2.getLat() - latlng1.getLat()) * Math.PI / 180;
+      const dLon = (latlng2.getLng() - latlng1.getLng()) * Math.PI / 180;
+      const lat1 = latlng1.getLat() * Math.PI / 180;
+      const lat2 = latlng2.getLat() * Math.PI / 180;
+
+      const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+      return R * c;
+    }
+
+    // 마커 필터링 함수
+    function filterMarkers(category) {
+      currentCategory = category;
+
+      const toggleDistance = document.getElementById('toggleDistance').checked;
+
+      clusterer.clear();
+      if (openedOverlay) {
+        openedOverlay.setMap(null);
+        openedOverlay = null;
+      }
+
+      let markersToShow;
+
+      if (category === 'all') {
+        markersToShow = allMarkers;
+      } else {
+        markersToShow = categorizedMarkers[category] || [];
+      }
+
+      if (toggleDistance && userLoc) {
+        // 5km 이내 필터 적용
+        markersToShow = markersToShow.filter(marker => {
+          return getDistance(userLoc, marker.getPosition()) <= 3;
+        });
+      }
+
+      clusterer.addMarkers(markersToShow);
+    }
+
+    // 스위치 토글 이벤트 연결
+    document.getElementById('toggleDistance').addEventListener('change', () => {
+      filterMarkers(currentCategory);
+    });
+
+    // 닫기 버튼 함수
+    function closeOverlay(index) {
+      const overlay = window['overlay_' + index];
+      if (overlay) {
+        overlay.setMap(null);
+        if (openedOverlay === overlay) openedOverlay = null;
+      }
+    }
+  </script>
+</body>
+</html>
