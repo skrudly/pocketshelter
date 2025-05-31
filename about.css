@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap');
+
+/* 전체 스타일일 */
+body {
+  margin: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #fffceb; /* 연한 베이지 */
+  color: #2a2a2a;
+}
+
+/* 헤더 네비게이션 바 */
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-right: 20px;
+}
+
+.nav-links li {
+  flex: none;           /* 이게 반드시 필요합니다! */
+}
+
+.nav-links a {
+  display: block;
+  text-align: center;         /* 핵심 정렬 */
+  text-decoration: none;
+  color: #d32f2f;
+  padding: 6px 0px 6px 21px;
+  font-weight: 700;
+  font-size: 22px;
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  color: #b71c1c;
+}
+
+/* 로고 */
+.logo-text {
+  display: flex;
+  left: 80px;
+  align-items: center;
+  font-size: 40px;
+  font-weight: 900;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #d32f2f;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 49px;
+  margin-left: 30px;
+  margin-right: 12px;
+}
+
+/* 메인 소개 영역 */
+.main-about {
+  max-width: 960px;
+  margin: 100px auto 80px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.main-about h1 {
+  font-size: 40px;
+  font-weight: 900;
+  color: #d32f2f;
+  line-height: 1.5;
+  margin-bottom: 32px;
+}
+
+.main-about h2 {
+  font-size: 33px;
+  font-weight: 900;
+  color: #d32f2f;
+  line-height: 1.5;
+  margin-bottom: 32px;
+}
+
+.main-about h1,
+.main-about h2 {
+  margin-top: 80px;   /* 제목 위 간격 */
+  margin-bottom: 24px;
+}
+
+.main-about p,
+.main-about ul {
+  margin-bottom: 60px;  /* 설명 아래 간격 */
+}
+
+.main-about p {
+  font-size: 22px;
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 50px;
+}
+
+.main-about ul {
+  font-size: 22px;
+  line-height: 1.8;
+  list-style: none;
+  padding-left: 0;
+}
+
+.main-about section {
+  margin: 80px 0;
+}
+
+/* 퀴즈 버튼 */
+.quiz-button {
+  display: inline-block;
+  padding: 14px 36px;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: #d32f2f;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.quiz-button:hover {
+  background-color: #b71c1c;
+}
+
+/* 푸터 */
+footer {
+  text-align: center;
+  padding: 40px 0;
+  background-color: #fff;
+  color: #888;
+  border-top: 1px solid #ddd;
+  font-size: 14px;
+}

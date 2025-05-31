@@ -81,6 +81,7 @@ body {
 
 /* 텍스트 영역 */
 .text-content {
+  margin-top: 80px;
   max-width: 600px;
   flex: 1;
   min-width: 300px;
