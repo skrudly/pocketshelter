@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>지진 대피 퀴즈</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+      background-color: #d9b6f4;
+    }
+
+    .quiz-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .quiz-box {
+      background-color: #fff6ef;
+      border-radius: 20px;
+      padding: 40px 60px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      width: 90%;
+    }
+
+    .quiz-question {
+      font-size: 24px;
+      font-weight: 700;
+      color: #f3c945;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .quiz-question span {
+      color: #8c44f7;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-size: 18px;
+      color: #5c20a1;
+    }
+
+    .quiz-options div {
+      padding: 12px 16px;
+      border-radius: 10px;
+      background-color: #f7f2fd;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .quiz-options div:hover {
+      background-color: #e6dfff;
+    }
+  </style>
+  <script>
+    function checkAnswer(option) {
+      if (option === 3) {
+        window.location.href = 'result.html';
+      } else {
+        alert('정답이 아닙니다. 다시 선택해보세요.');
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="quiz-container">
+    <div class="quiz-box">
+      <div class="quiz-question">
+        <span>Q.</span> 집 안에 있는데<br>지진이 발생한 것 같다.<br>어디로 대피해야 할까?
+      </div>
+      <div class="quiz-options">
+        <div onclick="checkAnswer(1)">1. 제일 크고 튼튼한 장롱 옆으로</div>
+        <div onclick="checkAnswer(2)">2. 구조를 기다리며 유리창 옆으로</div>
+        <div onclick="checkAnswer(3)">3. 좁고 불편하지만 대리석 식탁 아래로</div>
+        <div onclick="checkAnswer(4)">4. 아파트 대피 공간의 피난 사다리 위로</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

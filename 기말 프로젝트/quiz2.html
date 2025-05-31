@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>퀴즈 2번</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Pretendard', sans-serif;
+      background-color: #f9f9f9;
+    }
+    .quiz-container {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      font-size: 24px;
+      color: #333;
+    }
+    .option {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f3f4f6;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .option:hover {
+      background-color: #e0e7ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2>2) 다음 중 ‘재난 대피소’로 적절한 장소는?</h2>
+    <div class="option" onclick="checkAnswer(1)">고층 아파트 옥상</div>
+    <div class="option" onclick="checkAnswer(2)">대형마트 주차장</div>
+    <div class="option" onclick="checkAnswer(3)">관공서 운동장 </div>
+    <div class="option" onclick="checkAnswer(4)">지하철 역사 내부</div>
+    <div class="option" onclick="checkAnswer(5)">영화관</div>
+  </div>
+
+  <script>
+    function checkAnswer(choice) {
+      const correct = 3;
+      if (choice === correct) {
+        localStorage.setItem('score', (parseInt(localStorage.getItem('score')) || 0) + 5);
+        window.location.href = 'correct2.html';
+      } else {
+        window.location.href = 'wrong2.html';
+      }
+    }
+  </script>
+</body>
+</html>
