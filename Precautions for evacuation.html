@@ -3,70 +3,159 @@
 <head>
   <meta charset="UTF-8">
   <title>Pocket Shelter – 대피 시 유의 사항</title>
-  <link rel="stylesheet" href="shelter_style_2.css">
+  <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <a href="index_home.html" class="logo-link">
+        <img src="logo.png" alt="Pocket Shelter 로고" class="logo-icon"/>
+        <span class="logo-text">Pocket Shelter</span>
+      </a>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="introduce.html">소개</a></li>
+        <li><a href="kakaomap3.html">가까운 대피소</a></li>
+        <li>
+          <a href="https://www.safekorea.go.kr/idsiSFK/neo/sfk/cs/contents/civil_defense/SDIJKM1402.html?menuSeq=57"
+             target="_blank"
+             rel="noopener noreferrer">
+            지역별 대피소
+          </a>
+        </li>
+         <li class="dropdown">
+          <a href="#">대피 시 유의사항</a>
+          <ul class="dropdown-menu">
+            <li><a href="Precautions for evacuation.html">재난별 행동요령</a></li>
+            <li><a href="Emergency supplies.html">비상 대피 용품</a></li>
+          <ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  
   <style>
 
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #fffceb; /* 연한 베이지 */
+      color: #2a2a2a;
+    }
 
+  /* 헤더 네비게이션 바 */
+    html {
+      overflow-y: scroll;
+      scrollbar-gutter: stable;
+    }
 
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .nav-links {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 25px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      margin-right: 20px;
+    }
+    
+    .nav-links li {
+      flex: none;           /* 이게 반드시 필요합니다! */
+    }
+    
+    .nav-links a {
+      display: block;
+      text-align: center;         /* 핵심 정렬 */
+      text-decoration: none;
+      color: #d32f2f;
+      padding: 6px 0px 6px 21px;
+      font-weight: 700;
+      font-size: 22px;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
 
-  body {
-    margin: 0;
-    font-family: 'Noto Sans KR', sans-serif;
-    background-color: #fff6f6; 
-    color: #2a2a2a;
-    background-image: url('./images/background.jpg'); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+    .nav-links a:hover {
+      color: #b71c1c;
+    }
 
-  .navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 50px;
-    background-color: white;
-    border-bottom: 1px solid #eee;
-  }
+/* 드롭다운 기본 설정 */
+    .dropdown {
+      position: relative;
+    }
 
-  .logo {
-    position: absolute;
-    left: 80px;
-    font-size: 40px;
-    font-weight: 900;
-    font-family: 'Noto Sans KR', sans-serif;
-    color: #d32f2f;
-  }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 15.5px;
+      background-color: #ffeeee;
+      border: 2px solid #a8a8a8;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      z-index: 1000;
+    }
 
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 40px;
-    margin: 0;
-    padding: 0;
-  }
+    .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      color: #d32f2f;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 18px;
+    }
 
-  .nav-links.center {
-    justify-content: center;
-  }
+    .dropdown-menu li a:hover {
+      background-color: #d6b4c9;
+    }
 
-  .nav-links li {
-    position: relative;
-  }
+    .dropdown-menu li + li {
+      border-top: 2px solid #a8a8a8;  /* 메뉴 항목 사이 선 */
+    }
 
-  .nav-links a {
-    text-decoration: none;
-    color: #d32f2f;
-    font-weight: 700;
-    font-size: 20px;
-    padding: 12px 16px;
-    display: inline-block;
-    transition: color 0.2s ease;
-  }
+/* 마우스 호버 시 표시 */
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
 
-  .nav-links a:hover {
-    color: #d32f2f;
-  }
+/* 로고 */
+    .logo-text {
+      display: flex;
+      left: 80px;
+      align-items: center;
+      font-size: 40px;
+      font-weight: 900;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #d32f2f;
+    }
+    
+    .logo a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 49px;
+      margin-left: 30px;
+      margin-right: 12px;
+    }
 
   .dropdown-content {
     display: none;
@@ -169,7 +258,6 @@
   .main {
     display: flex;
     padding: 20px;
-    background: #fdf6f5;
   }
   .tabs {
     list-style: none;
@@ -182,7 +270,6 @@
     position: sticky;
     top: 80px;
     align-self: flex-start;
-    background: #fdf6f5;
   }
   .tabs li {
     padding: 12px;
@@ -250,43 +337,6 @@
     /* 필요시 font-weight: 600; 추가 가능 */
   }
 </style>
-
-
-
-
-
-
-  <header class="navbar">
-    <div class="logo">
-      <img src="./images/logo.png" alt="Pocket Shelter 로고" class="logo-icon">
-      Pocket Shelter
-    </div>
-    <nav>
-      <ul class="nav-links">
-        <li>
-          <a href="#">소개</a>
-        </li>
-        <li>
-          <a href="#">가까운 대피소</a>
-        </li>
-        <li>
-          <a href="https://www.safekorea.go.kr/idsiSFK/neo/sfk/cs/contents/civil_defense/SDIJKM1402.html?menuSeq=57"
-             target="_blank"
-             rel="noopener noreferrer">
-            지역별 대피소
-          </a>
-        </li>
-         <li>
-          <a href="#", class="active">대피 시 유의사항</a>
-          <div class="dropdown-content row">
-            <a href="Precautions for evacuation.html">재난별 행동요령</a>
-            <a href="Emergency supplies.html">비상 대비 용품</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-
 
 
   <!-- 메인 + 탭 -->

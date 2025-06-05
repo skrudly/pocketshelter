@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>테스트 결과</title>
+  <style>
+    body, html { margin: 0; padding: 0; font-family: 'Pretendard'; background-color: #fff; }
+    .result-container { max-width: 700px; margin: 80px auto; padding: 40px; text-align: center; }
+    h1 { font-size: 28px; color: #222; }
+    .score { font-size: 48px; margin: 20px 0; color: #a855f7; }
+    .message { font-size: 18px; line-height: 1.6; margin-bottom: 40px; }
+    .home-btn { padding: 15px 30px; font-size: 16px; background-color: #e9d5ff; border: none; border-radius: 30px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="result-container">
+    <h1>나의 재난 대응 점수는?</h1>
+    <div class="score" id="finalScore">0점</div>
+    <div class="message" id="message"></div>
+    <button class="home-btn" onclick="location.href='index_home.html'">홈으로 돌아가기</button>
+  </div>
+  <script>
+    const score = parseInt(localStorage.getItem('score')) || 0;
+    document.getElementById('finalScore').innerText = `${score}점`;
+    let msg = '';
+    if (score === 0) {
+      msg = '네?? 위험해요! 너무너무 위험해요! 지금 바로 대피 요령을 학습해야 해요.';
+    } else if (score <= 10) {
+      msg = '위험천만! 무의식적으로 위험을 감수하는 경향이 있어요. 조금 더 관심을 가져봐요!';
+    } else if (score === 15) {
+      msg = '보통이에요. 재난 상황에 대비는 하고 있지만, 더 배워야 할 부분도 있어요!';
+    } else if (score === 20) {
+      msg = '훌륭해요! 대부분 잘 알고 있어요. 재난 시 여러분의 침착한 행동이 큰 도움이 될 거예요.';
+    } else if (score === 25) {
+      msg = '칭찬해요! 재난 전문가 수준이에요. 당신 덕분에 모두가 안전할 수 있어요! 🎉';
+    }
+    document.getElementById('message').innerText = msg;
+    localStorage.clear();
+  </script>
+</body>
+</html>

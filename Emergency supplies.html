@@ -3,31 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <title>Pocket Shelter</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style2.css">
 </head>
 <body>
   <header class="navbar">
     <div class="logo">
-      <img src="./images/logo.png" alt="Pocket Shelter 로고" class="logo-icon">
-      Pocket Shelter
+      <a href="index_home.html" class="logo-link">
+        <img src="logo.png" alt="Pocket Shelter 로고" class="logo-icon"/>
+        <span class="logo-text">Pocket Shelter</span>
+      </a>
     </div>
     <nav>
       <ul class="nav-links">
-        <li>
-          <a href="about.html">소개</a>
-        </li>
-        <li>
-          <a href="#">가까운 대피소</a>
-        </li>
+        <li><a href="introduce.html">소개</a></li>
+        <li><a href="kakaomap3.html">가까운 대피소</a></li>
         <li>
           <a href="https://www.safekorea.go.kr/idsiSFK/neo/sfk/cs/contents/civil_defense/SDIJKM1402.html?menuSeq=57"
              target="_blank"
-             rel="noopener noreferrer">
-            지역별 대피소
-          </a>
+             rel="noopener noreferrer">지역별 대피소</a>
         </li>
-         <li>
-          <a href="https://skrudly.github.io/pocketshelter/Precautions%20for%20evacuation.html">대피 시 유의사항</a>
+        <li class="dropdown">
+          <a href="#">대피 시 유의사항</a>
+          <ul class="dropdown-menu">
+            <li><a href="Precautions for evacuation.html">재난별 행동요령</a></li>
+            <li><a href="Emergency supplies.html">비상 대피 용품</a></li>
+          <ul>
         </li>
       </ul>
     </nav>
@@ -39,168 +39,133 @@
 
 
   <style>
+  /* 전체 스타일일 */
+    body {
+      margin: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #fffceb; /* 연한 베이지 */
+      color: #2a2a2a;
+    }
+
+  /* 헤더 네비게이션 바 */
+    html {
+      overflow-y: scroll;
+      scrollbar-gutter: stable;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .nav-links {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 25px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      margin-right: 20px;
+    }
+    
+    .nav-links li {
+      flex: none;           /* 이게 반드시 필요합니다! */
+    }
+    
+    .nav-links a {
+      display: block;
+      text-align: center;         /* 핵심 정렬 */
+      text-decoration: none;
+      color: #d32f2f;
+      padding: 6px 0px 6px 21px;
+      font-weight: 700;
+      font-size: 22px;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: #b71c1c;
+    }
+
+/* 드롭다운 기본 설정 */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 15.5px;
+      background-color: #ffeeee;
+      border: 2px solid #a8a8a8;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      z-index: 1000;
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      color: #d32f2f;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 18px;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: #d6b4c9;
+    }
+
+    .dropdown-menu li + li {
+      border-top: 2px solid #a8a8a8;  /* 메뉴 항목 사이 선 */
+    }
+
+/* 마우스 호버 시 표시 */
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+/* 로고 */
+    .logo-text {
+      display: flex;
+      left: 80px;
+      align-items: center;
+      font-size: 40px;
+      font-weight: 900;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #d32f2f;
+    }
+    
+    .logo a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 49px;
+      margin-left: 30px;
+      margin-right: 12px;
+    }
+
   
-  body {
-    margin: 0;
-    font-family: 'Noto Sans KR', sans-serif;
-    background-color: #fff6f6; 
-    color: #2a2a2a;
-    background-image: url('./images/background.jpg'); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  .navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 50px;
-    background-color: white;
-    border-bottom: 1px solid #eee;
-  }
-
-  .logo {
-    position: absolute;
-    left: 80px;
-    font-size: 40px;
-    font-weight: 900;
-    font-family: 'Noto Sans KR', sans-serif;
-    color: #d32f2f;
-  }
-
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 40px;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-links.center {
-    justify-content: center;
-  }
-
-
-  .nav-links li {
-    position: relative;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    color: #d32f2f;
-    font-weight: 700;
-    font-size: 20px;
-    padding: 12px 16px;
-    display: inline-block;
-    transition: color 0.2s ease;
-  }
-
-  .nav-links a:hover {
-    color: #d32f2f;
-  }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    top: 40px;
-    left: 0;
-    background-color: #ffe5e5;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-  }
-
-  .dropdown-content a {
-    text-decoration: none;
-    color: #2a2a2a;
-    padding: 10px 14px;
-    background: white;
-    border-radius: 4px;
-    white-space: nowrap;
-    text-align: center;
-    transition: background 0.2s;
-    font-size: 17px;
-    font-weight: 500;
-    font-family: 'Noto Sans KR', sans-serif;
-  }
-
-  .dropdown-content a:hover {
-    background-color: #fae7c3;
-  }
-
-  .dropdown:hover .dropdown-content.grid {
-    display: grid;
-  }
-
-  .dropdown:hover .dropdown-content.row {
-    display: flex;
-  }
-
-  .dropdown-content.grid {
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(2, auto);
-    gap: 14px;
-    width: 750px;
-    padding: 24px 28px;
-    background-color: #fae7c3;
-    border-radius: 12px;
-  }
-
-  .dropdown-content.row {
-    flex-direction: row;
-    gap: 14px;
-    padding: 12px 16px;
-    width: fit-content;
-    min-width: unset;
-  }
-
-  .hero-text {
-    text-align: left;
-    max-width: 700px;
-    margin: 160px 0 0 80px;
-    padding: 0;
-  }
-
-  .subtitle {
-    font-size: 18px;
-    color: #444;
-    line-height: 1.6;
-    margin-bottom: 24px;
-  }
-
-  .heading-line {
-    font-size: 48px;
-    font-weight: 900;
-    line-height: 1.2;
-    margin: 0 0 10px 0;
-    color: #d32f2f;
-  }
-
-  .hero-text button {
-    padding: 14px 28px;
-    margin-top: 23px;
-    font-size: 17px;
-    font-weight: 700;
-    background-color: #d32f2f;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .hero-text button:hover {
-    background-color: #d32f2f;
-  }
-
 
   /* ── 메인 + 탭 레이아웃 ── */
   .main {
     display: flex;
     padding: 20px;
-    background: #fdf6f5;
   }
 
   .tabs {
@@ -321,7 +286,7 @@
         <div class="info-box">
           - 생수, 간편식, 손전등, 상비약, 라디오(건전지), 화장지(물티슈), 우의, 담요, 방독면, 마스크 등<br>
           - 가능하면 평소에 가족 수대로 비상용 가방 준비<br>
-          - 비상식량, 음료수, 손전등, 건전지, 성냥, 라이터, 휴대용 라디오, 비상 의류, 속옷, 병따개, 화장지, 수건, 구급용품, 귀중품(현금/보험증서), 안경 등(생활용품), 생리용품, 종이기저귀<br><br>
+          - 비상식량, 손전등, 건전지, 성냥, 라이터, 휴대용 라디오, 비상 의류, 속옷, 병따개, 화장지, 수건, 구급용품, 귀중품(현금/보험증서), 안경 등(생활용품), 생리용품, 종이기저귀<br><br>
           → 귀중품 및 중요한 서류 : 중요한 서류는 방수가 되는 비닐에 보관<br>
           → 여분의 자동차 키와 집 열쇠 세트<br>
           → 신용카드, 현금카드 및 현금<br>

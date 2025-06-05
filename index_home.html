@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Pocket Shelter</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style2.css">
 </head>
 <body>
   <header class="navbar">
     <div class="logo">
-      <img src="./images/logo.png" alt="Pocket Shelter 로고" class="logo-icon">
+      <img src="logo.png" alt="Pocket Shelter 로고" class="logo-icon">
       Pocket Shelter
     </div>
     <nav>
@@ -17,7 +17,7 @@
           <a href="introduce.html">소개</a>
         </li>
         <li>
-          <a href="#">가까운 대피소</a>
+          <a href="kakaomap3.html">가까운 대피소</a>
         </li>
         <li>
           <a href="https://www.safekorea.go.kr/idsiSFK/neo/sfk/cs/contents/civil_defense/SDIJKM1402.html?menuSeq=57"
@@ -26,8 +26,12 @@
             지역별 대피소
           </a>
         </li>
-         <li>
+        <li class="dropdown">
           <a href="#">대피 시 유의사항</a>
+          <ul class="dropdown-menu">
+            <li><a href="Precautions for evacuation.html">재난별 행동요령</a></li>
+            <li><a href="Emergency supplies.html">비상 대피 용품</a></li>
+          <ul>
         </li>
       </ul>
     </nav>
@@ -41,13 +45,14 @@
       </p>
       <h1 class="heading-line">내 위치와 가장 가까운</h1>
       <h1 class="heading-line">대피소는 어딜까?</h1>
-      <button>나와 가장 가까운 대피소 알아보기</button>
-    </div>
-  </main>
-    <div class="character-fixed">
-      <img src="./images/soojung.png" alt="수정" class="character-img">
-      <img src="./images/question.png" alt="물음표" class="question-icon">
+      <button onclick="location.href='kakaomap3.html'" class="q.button">
+        나와 가장 가까운 대피소 알아보기
+      </button>
     </div>
 
+    <a href="index_quiz.html" class="quiz-float-button">퀴즈 풀러가기</a>
+    
+    <img src="background2.png" alt="배경" class="background-image">
+  </main>
 </body>
 </html>

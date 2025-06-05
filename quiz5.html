@@ -1,0 +1,39 @@
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>재난 대피 퀴즈 - 문제 5</title>
+  <style>
+    body, html { margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; background-color: #f4f4f4; }
+    .container { max-width: 700px; margin: 80px auto; padding: 30px; background: white; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h2 { font-size: 24px; color: #333; }
+    .option button { width: 100%; padding: 15px; margin: 10px 0; font-size: 16px; border: none; border-radius: 10px; background-color: #e0e0e0; cursor: pointer; transition: 0.3s; }
+    .option button:hover { background-color: #d0d0d0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>5) 불이 났을 때, 대피 시 가장 중요한 것은?</h2>
+    <div class="option">
+      <button onclick="goToWrong()">소지품을 챙겨서 나간다</button>
+      <button onclick="goToWrong()">물을 뿌리고 진화해 본다</button>
+      <button onclick="goToCorrect(5)">낮은 자세로 연기를 피해서 대피한다</button>
+      <button onclick="goToWrong()">옥상으로 올라가 구조를 기다린다</button>
+    </div>
+  </div>
+  <script>
+    function goToCorrect(score) {
+      const current = parseInt(localStorage.getItem('score')) || 0;
+      localStorage.setItem('score', current + score);
+      location.href = 'correct5.html';
+    }
+    function goToWrong() {
+      location.href = 'wrong5.html';
+    }
+  </script>
+</body>
+</html>
+
+

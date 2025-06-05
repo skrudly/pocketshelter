@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>퀴즈 1번</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Pretendard', sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      font-size: 24px;
+      color: #333;
+    }
+
+    .option {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f3f4f6;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .option:hover {
+      background-color: #e0e7ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2>1) 지진이 발생했을 때 가장 먼저 해야 할 행동은 무엇일까요?</h2>
+    <div class="option" onclick="checkAnswer(1)">무작정 건물 밖으로 뛰쳐나간다</div>
+    <div class="option" onclick="checkAnswer(2)">튼튼한 책상 아래에 들어가 머리를 보호한다</div>
+    <div class="option" onclick="checkAnswer(3)">창문 쪽으로 이동해서 밖을 확인한다</div>
+    <div class="option" onclick="checkAnswer(4)">엘리베이터를 타고 아래로 내려간다</div>
+  </div>
+
+  <script>
+    function checkAnswer(choice) {
+      const correct = 2;
+      if (choice === correct) {
+        // 정답: 점수 +5
+        const currentScore = parseInt(localStorage.getItem('score')) || 0;
+        localStorage.setItem('score', currentScore + 5);
+        window.location.href = 'correct1.html';
+      } else {
+        // 오답: 점수 변화 없음
+        window.location.href = 'wrong1.html';
+      }
+    }
+  </script>
+</body>
+</html>

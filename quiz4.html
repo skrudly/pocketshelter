@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>문제 4</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+      background-color: #fff;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 100px auto;
+      padding: 40px;
+      text-align: center;
+      background-color: #f1f5f9;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      font-size: 24px;
+      color: #111827;
+      margin-bottom: 30px;
+    }
+
+    .option button {
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      margin: 15px auto;
+      padding: 15px;
+      font-size: 18px;
+      background-color: #e0e7ff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .option button:hover {
+      background-color: #c7d2fe;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>4) 우리 동네 대피소 위치는 어디인지 알고 계신가요?</h2>
+    <div class="option">
+      <button onclick="goToCorrect(5)">알고 있다</button> <!-- 정답 -->
+      <button onclick="goToWrong()">잘 모르겠다</button> <!-- 오답 -->
+    </div>
+  </div>
+
+  <script>
+    function goToCorrect(points) {
+      let score = parseInt(localStorage.getItem('score')) || 0;
+      score += points;
+      localStorage.setItem('score', score);
+      location.href = 'quiz5.html';
+    }
+
+    function goToWrong() {
+      // 점수는 그대로 유지
+      location.href = 'quiz5.html';
+    }
+  </script>
+</body>
+</html>

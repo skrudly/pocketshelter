@@ -1,0 +1,37 @@
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>재난 대피 퀴즈 - 문제 3</title>
+  <style>
+    body, html { margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; background-color: #f4f4f4; }
+    .container { max-width: 700px; margin: 80px auto; padding: 30px; background: white; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h2 { font-size: 24px; color: #333; }
+    .option button { width: 100%; padding: 15px; margin: 10px 0; font-size: 16px; border: none; border-radius: 10px; background-color: #e0e0e0; cursor: pointer; transition: 0.3s; }
+    .option button:hover { background-color: #d0d0d0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>3) 태풍이 다가올 때, 올바른 행동은?</h2>
+    <div class="option">
+      <button onclick="goToWrong()">창문을 열어 바람을 통하게 한다</button>
+      <button onclick="goToCorrect(5)">외출은 자제하고 TV나 라디오로 상황을 확인한다</button>
+      <button onclick="goToWrong()">비를 피할 수 있게 나무 아래에 선다</button>
+      <button onclick="goToWrong()">높은 곳에서 영상을 찍어 SNS에 올린다</button>
+    </div>
+  </div>
+  <script>
+    function goToCorrect(score) {
+      const current = parseInt(localStorage.getItem('score')) || 0;
+      localStorage.setItem('score', current + score);
+      location.href = 'correct3.html';
+    }
+    function goToWrong() {
+      location.href = 'wrong3.html';
+    }
+  </script>
+</body>
+</html>
